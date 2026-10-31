@@ -1,0 +1,43 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_ test_identifier_rls_arms_run_recurring_retention_with_frozen_probes[rls_head_resid_identmap50_r] _
+
+name = 'rls_head_resid_identmap50_r'
+
+    @pytest.mark.parametrize("name", IDENTIFIER_ARMS)
+    def test_identifier_rls_arms_run_recurring_retention_with_frozen_probes(name: str) -> None:
+>       report = run_recurring_ipmnist_retention_development(
+            DATA_X, DATA_Y, screening_spec(name), seed=19, config=CONFIG,
+            phase_lengths=(2, 3, 2),
+            permutations=(PERMUTATION_A, PERMUTATION_B, PERMUTATION_A.copy()),
+            sentinel_indices=SENTINELS, relearning_window=1,
+        )
+
+tests/test_ipmnist_recurring_adapter.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+alberta_framework/benchmarks/ipmnist_screening.py:10232: in run_recurring_ipmnist_retention_development
+    model_inputs = spec.frozen_probe_input(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def _rls_head_frozen_probe_input(
+        state: Any, observation: Array, hyperparameters: Mapping[str, float]
+    ) -> Array:
+        """Refuse sentinel probes for the RLS-readout arms.
+    
+        The deployed prediction is ``argmax(wout.T @ phi)``, not ``mlp_logits``:
+        in resid mode w3/b3 are never trained, and in parallel mode probing the
+        SGD head would silently score the passenger model instead of the
+        deployed readout.  Fail closed, the rff_rls/naive_bayes precedent.
+        """
+        del state, observation, hyperparameters
+>       raise NotImplementedError(
+            "sentinel probes are unsupported for the rls_head arms: the deployed "
+            "model is the champion body + RLS readout, not the protocol MLP head "
+            "that the probe harness would score"
+        )
+E       NotImplementedError: sentinel probes are unsupported for the rls_head arms: the deployed model is the champion body + RLS readout, not the protocol MLP head that the probe harness would score
+
+alberta_framework/benchmarks/ipmnist_screening.py:5567: NotImplementedError
+=========================== short test summary info ============================
+FAILED tests/test_ipmnist_recurring_adapter.py::test_identifier_rls_arms_run_recurring_retention_with_frozen_probes[rls_head_resid_identmap50_r]
+1 failed in 1.90s

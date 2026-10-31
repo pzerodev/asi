@@ -1,0 +1,352 @@
+{
+  "arm": "rls_head_resid_identmap50_r_idet003_s005625",
+  "dataset_provenance": {
+    "materialization": "alberta.ipmnist.float32-neg1-pos1-int32-labels.v1",
+    "schema": "alberta.ipmnist_screening.dataset_provenance.v1",
+    "source": {
+      "name": "mnist_784",
+      "provider": "openml",
+      "row_start": 0,
+      "row_stop_exclusive": 60000,
+      "version": 1
+    },
+    "x": {
+      "dtype": "<f4",
+      "sha256": "b8078cd833f53d89828a5e28d728517be9add34076f13fe973399f1f16381313",
+      "shape": [
+        60000,
+        784
+      ]
+    },
+    "y": {
+      "dtype": "<i4",
+      "sha256": "4f1dd9551f104f8153409e0add59f0a71568f7bad5a5f8e2274480c186fe219a",
+      "shape": [
+        60000
+      ]
+    }
+  },
+  "driver_sha256": "2f523ee62286270c72748584180e023ee56ee695241db14d72597b90c5ecfe76",
+  "environment": {
+    "jax": {
+      "backend": "cpu",
+      "config": {
+        "jax_default_matmul_precision": null,
+        "jax_default_prng_impl": "threefry2x32",
+        "jax_disable_jit": false,
+        "jax_enable_x64": false,
+        "jax_numpy_dtype_promotion": "standard",
+        "jax_numpy_rank_promotion": "allow",
+        "jax_random_seed_offset": 0,
+        "jax_threefry_partitionable": true
+      },
+      "devices": [
+        {
+          "device_kind": "cpu",
+          "id": 0,
+          "platform": "cpu",
+          "process_index": 0
+        }
+      ]
+    },
+    "packages": {
+      "chex": "0.1.92",
+      "jax": "0.11.0",
+      "jaxlib": "0.11.0",
+      "numpy": "2.5.1",
+      "scikit-learn": "1.9.0"
+    },
+    "platform": {
+      "machine": "arm64",
+      "release": "24.6.0",
+      "system": "Darwin"
+    },
+    "process_environment": {
+      "CUDA_VISIBLE_DEVICES": null,
+      "JAX_DEFAULT_MATMUL_PRECISION": null,
+      "JAX_ENABLE_X64": null,
+      "JAX_PLATFORMS": "cpu",
+      "JAX_PLATFORM_NAME": null,
+      "OMP_NUM_THREADS": "1",
+      "XLA_FLAGS": null
+    },
+    "python": {
+      "implementation": "CPython",
+      "version": "3.12.10"
+    },
+    "schema": "alberta.ipmnist_screening.runtime.v1"
+  },
+  "permutations_sha256": [
+    "ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee",
+    "e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89"
+  ],
+  "report": {
+    "assessment_status": "not-assessed",
+    "catastrophic_forgetting_absence_claimed": false,
+    "development_status": "development-only-not-assessed",
+    "evidence_class": "development_recurring_ipmnist_diagnostic",
+    "limitations": [
+      "one fixed A/B/A recurrence is a development diagnostic, not external validation",
+      "sentinel cases and their ordered digests are evaluator supplied and not calibrated here",
+      "state hashes detect declared probe mutation but cannot audit hidden side effects",
+      "relearning savings can coexist with poor direct retention and is not proof of memory",
+      "one-step plasticity measures immediate same-example improvement, not retained knowledge",
+      "no thresholds, matched baselines, uncertainty estimates, or scientific promotion apply"
+    ],
+    "metric_definitions": {
+      "one_step_plasticity": "the screening lane's clipped same-example post-update loss improvement; this is an immediate adaptation diagnostic and is not a retention measurement",
+      "peak_to_revisit_forgetting": "non-negative peak sentinel accuracy before revisit minus the pre-revisit score",
+      "pre_revisit_sentinel_accuracy": "accuracy on the recurring permutation's fixed evaluator-only sentinel set from the frozen learner state after the intervening phase and before any revisit update",
+      "relearning_savings_accuracy": "revisit leading-window pre-update accuracy minus first-exposure leading-window pre-update accuracy",
+      "relearning_savings_mistakes": "first-exposure leading-window mistakes minus revisit leading-window mistakes",
+      "retention_change_from_acquisition": "pre-revisit sentinel accuracy minus first-acquisition-end sentinel accuracy",
+      "revisit_recovery": "revisit-end sentinel accuracy minus pre-revisit sentinel accuracy"
+    },
+    "performance_thresholds_applied": false,
+    "phase_summaries": [
+      {
+        "exposure_index": 0,
+        "mean_post_update_one_step_plasticity": 0.08626640899181366,
+        "mean_pre_update_online_accuracy": 0.7488,
+        "observation_count": 5000,
+        "online_mistakes": 1256,
+        "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+        "phase_index": 0
+      },
+      {
+        "exposure_index": 0,
+        "mean_post_update_one_step_plasticity": 0.17579833142757414,
+        "mean_pre_update_online_accuracy": 0.8796,
+        "observation_count": 5000,
+        "online_mistakes": 602,
+        "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+        "phase_index": 1
+      },
+      {
+        "exposure_index": 1,
+        "mean_post_update_one_step_plasticity": 0.20606544338464736,
+        "mean_pre_update_online_accuracy": 0.9126,
+        "observation_count": 5000,
+        "online_mistakes": 437,
+        "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+        "phase_index": 2
+      }
+    ],
+    "protocol": {
+      "evaluator_only_fields": [
+        "phase_index",
+        "permutation_id",
+        "permutation_sha256",
+        "exposure_index",
+        "sentinel_set_id",
+        "sentinel_set_sha256",
+        "sentinel_correctness"
+      ],
+      "exposure_index_origin": 0,
+      "learner_visible_trace_fields": [
+        "pre_update_online_accuracy",
+        "post_update_one_step_plasticity"
+      ],
+      "phases": [
+        {
+          "exposure_index": 0,
+          "length": 5000,
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "phase_index": 0,
+          "start_step": 0
+        },
+        {
+          "exposure_index": 0,
+          "length": 5000,
+          "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+          "phase_index": 1,
+          "start_step": 5000
+        },
+        {
+          "exposure_index": 1,
+          "length": 5000,
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "phase_index": 2,
+          "start_step": 10000
+        }
+      ],
+      "probe_ownership": "evaluator-only-frozen",
+      "probe_timing": "after-phase-before-next-online-update",
+      "protocol_id": "ipmnist-screening-aba-e9d3172b52346ac36bbfb514801c941b409a4f9f1aa03c1843490feae1cf0d71.v1",
+      "relearning_window": 250,
+      "required_probe_snapshots": [
+        {
+          "checkpoint_step": 5000,
+          "exposure_index": 0,
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "permutation_sha256": "ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee",
+          "phase_index": 0,
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1",
+          "sentinel_set_sha256": "8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8"
+        },
+        {
+          "checkpoint_step": 10000,
+          "exposure_index": 0,
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "permutation_sha256": "ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee",
+          "phase_index": 1,
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1",
+          "sentinel_set_sha256": "8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8"
+        },
+        {
+          "checkpoint_step": 10000,
+          "exposure_index": 0,
+          "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+          "permutation_sha256": "e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89",
+          "phase_index": 1,
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2.v1",
+          "sentinel_set_sha256": "d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2"
+        },
+        {
+          "checkpoint_step": 15000,
+          "exposure_index": 1,
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "permutation_sha256": "ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee",
+          "phase_index": 2,
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1",
+          "sentinel_set_sha256": "8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8"
+        },
+        {
+          "checkpoint_step": 15000,
+          "exposure_index": 0,
+          "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+          "permutation_sha256": "e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89",
+          "phase_index": 2,
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2.v1",
+          "sentinel_set_sha256": "d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2"
+        }
+      ],
+      "schedule": "A/B/A",
+      "schema": "alberta.recurring-ipmnist-retention.protocol.v1",
+      "sentinel_bindings": [
+        {
+          "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+          "permutation_sha256": "ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee",
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1",
+          "sentinel_set_sha256": "8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8"
+        },
+        {
+          "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+          "permutation_sha256": "e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89",
+          "sentinel_case_count": 512,
+          "sentinel_set_id": "ipmnist-sentinel-d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2.v1",
+          "sentinel_set_sha256": "d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2"
+        }
+      ],
+      "type": "RecurringIPMNISTProtocol"
+    },
+    "protocol_sha256": "4e560d9b653ce4228a1b176724a1be7d9a2713e849c1687ff0e9a67eec7b8311",
+    "recurrence": {
+      "acquisition_end_sentinel_accuracy": 0.853515625,
+      "first_exposure_index": 0,
+      "first_exposure_leading_mistakes": 187,
+      "first_exposure_leading_one_step_plasticity": 0.051808578968048094,
+      "first_exposure_leading_pre_update_accuracy": 0.252,
+      "peak_before_revisit_sentinel_accuracy": 0.853515625,
+      "peak_to_revisit_forgetting": 0.724609375,
+      "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+      "pre_revisit_sentinel_accuracy": 0.12890625,
+      "relearning_savings_accuracy": 0.608,
+      "relearning_savings_mistakes": 152,
+      "relearning_window": 250,
+      "retention_change_from_acquisition": -0.724609375,
+      "revisit_end_sentinel_accuracy": 0.884765625,
+      "revisit_exposure_index": 1,
+      "revisit_leading_mistakes": 35,
+      "revisit_leading_one_step_plasticity": 0.2340036437511444,
+      "revisit_leading_pre_update_accuracy": 0.86,
+      "revisit_recovery": 0.755859375
+    },
+    "retention_claimed": false,
+    "schema": "alberta.recurring-ipmnist-retention.report.v1",
+    "scientific_promotion_allowed": false,
+    "sentinel_scores": [
+      {
+        "accuracy": 0.853515625,
+        "checkpoint_step": 5000,
+        "correct_count": 437,
+        "exposure_index": 0,
+        "learner_state_sha256": "218bd420f9d912c257051198c47a7d42ed1c6d5d6f8462a84422d16005d33178",
+        "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+        "phase_index": 0,
+        "sentinel_case_count": 512,
+        "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1"
+      },
+      {
+        "accuracy": 0.12890625,
+        "checkpoint_step": 10000,
+        "correct_count": 66,
+        "exposure_index": 0,
+        "learner_state_sha256": "240f25d3568ea1e4bb0391011c7fc7a88d4fe6f5943fe83d4995014bd99fbd28",
+        "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+        "phase_index": 1,
+        "sentinel_case_count": 512,
+        "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1"
+      },
+      {
+        "accuracy": 0.875,
+        "checkpoint_step": 10000,
+        "correct_count": 448,
+        "exposure_index": 0,
+        "learner_state_sha256": "240f25d3568ea1e4bb0391011c7fc7a88d4fe6f5943fe83d4995014bd99fbd28",
+        "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+        "phase_index": 1,
+        "sentinel_case_count": 512,
+        "sentinel_set_id": "ipmnist-sentinel-d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2.v1"
+      },
+      {
+        "accuracy": 0.884765625,
+        "checkpoint_step": 15000,
+        "correct_count": 453,
+        "exposure_index": 1,
+        "learner_state_sha256": "fe32d906d35a09cc0f42a6ff9bd2518b2e9852454a0326607336209594918c54",
+        "permutation_id": "ipmnist-permutation-ed491f1f987730fa40bc055b0ea0d57cafd684573e0cccab8acceaae4be5c8ee.v1",
+        "phase_index": 2,
+        "sentinel_case_count": 512,
+        "sentinel_set_id": "ipmnist-sentinel-8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8.v1"
+      },
+      {
+        "accuracy": 0.06640625,
+        "checkpoint_step": 15000,
+        "correct_count": 34,
+        "exposure_index": 0,
+        "learner_state_sha256": "fe32d906d35a09cc0f42a6ff9bd2518b2e9852454a0326607336209594918c54",
+        "permutation_id": "ipmnist-permutation-e059d6cb8db503e2aca261fb266fe62ad20439e433dc8e39e831905f7f1a7e89.v1",
+        "phase_index": 2,
+        "sentinel_case_count": 512,
+        "sentinel_set_id": "ipmnist-sentinel-d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2.v1"
+      }
+    ],
+    "sentinel_snapshots_sha256": "f82305d8f236ed8ce6688222106ca7c888e01516f31013aa97bb636337df432c",
+    "trace_sha256": "ce86acd0375a22a25900d7b6adb4c483173a6379bbaad480bd02aa4df04e7733"
+  },
+  "seed": 91012,
+  "sentinel_indices_sha256": "5849704741dd2fa40f389db355492a3465d5861aefbaab05e34184134b41eaec",
+  "sentinel_sets_sha256": [
+    "8426bf132a2c8ea135b9e5d617c899b5a774819d735ac580ab18050af9e408d8",
+    "d43548030127256fd747b2f7cd403a94a25ae5d0bafc8f25e8abc2bc8a732ff2"
+  ],
+  "source_provenance": {
+    "git_commit": "0d7f8810199aa191edc7170bbf761518eb653d53",
+    "git_object_format": "sha1",
+    "git_tree": "8176770628fe80ae7d198f90be0a458ea3940c64",
+    "relevant_source_file_count": 232,
+    "relevant_source_scope": "tracked:alberta_framework/**,pyproject.toml,uv.lock",
+    "relevant_source_sha256": "ff7db26e3fb9bd3511a1c20f280bef7922679ca55a291c67d6ba994e9ef9a47f",
+    "schema": "alberta.ipmnist_screening.source_provenance.v1",
+    "uv_lock_sha256": "0fc52a642ba70bd64bfa80049b1efc99c35829d01e44705370994ad818ee82d7",
+    "worktree_clean": true
+  },
+  "wall_clock_seconds": 5.012529292143881
+}

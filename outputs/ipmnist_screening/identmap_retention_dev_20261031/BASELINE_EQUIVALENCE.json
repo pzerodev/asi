@@ -1,0 +1,8 @@
+{
+  "beforeCommit": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+  "executionCommit": "0d7f8810199aa191edc7170bbf761518eb653d53",
+  "arm": "rls_head_resid_l1_preset005",
+  "seed": 91010,
+  "completeReportEqual": true,
+  "reportSha256": "4b8236008d91b54277307854abd0b79b979882641c5feb5f22ec43cc61541dd6"
+}

@@ -1,0 +1,200 @@
+[
+  {
+    "arm": "rls_head_resid_l1_preset005",
+    "seed": 91010,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_l1_preset005",
+      "--seed",
+      "91010",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_l1_preset005_seed91010.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 8.690603374969214,
+    "userSeconds": 12.652322999999999,
+    "systemSeconds": 2.588787,
+    "maxRssBytesMacOS": 1882406912,
+    "sha256": "34f826e89e27f1e5d305798c19f09ce4b2963ebde292d7718b10cfa218df4816"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r",
+    "seed": 91010,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r",
+      "--seed",
+      "91010",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_seed91010.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.13540383381769,
+    "userSeconds": 13.290573,
+    "systemSeconds": 2.611397,
+    "maxRssBytesMacOS": 1908178944,
+    "sha256": "1040b52eff22d667bdfef4329923f188191f8656c174121a811e0da9379a969b"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r_idet003_s005625",
+    "seed": 91010,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r_idet003_s005625",
+      "--seed",
+      "91010",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_idet003_s005625_seed91010.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.139198124874383,
+    "userSeconds": 13.227594,
+    "systemSeconds": 2.60711,
+    "maxRssBytesMacOS": 1897742336,
+    "sha256": "ee1a3c407b4f83018c70ea2b73984728d92b85a31b799d360eddfb157826a7d7"
+  },
+  {
+    "arm": "rls_head_resid_l1_preset005",
+    "seed": 91011,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_l1_preset005",
+      "--seed",
+      "91011",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_l1_preset005_seed91011.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.109361833892763,
+    "userSeconds": 12.842577,
+    "systemSeconds": 2.632852,
+    "maxRssBytesMacOS": 1927479296,
+    "sha256": "de2f1ccb4c55a46a8dec1cf233dd03b089b8d51d91aedd9a0567338568183ddb"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r",
+    "seed": 91011,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r",
+      "--seed",
+      "91011",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_seed91011.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.178923208964989,
+    "userSeconds": 13.133628999999999,
+    "systemSeconds": 2.608047,
+    "maxRssBytesMacOS": 1904066560,
+    "sha256": "a10bf555419d8e5abd5fa74e935844d541ae618ff40c28ad32a27cabb3a0cf42"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r_idet003_s005625",
+    "seed": 91011,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r_idet003_s005625",
+      "--seed",
+      "91011",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_idet003_s005625_seed91011.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.276733708102256,
+    "userSeconds": 13.19532,
+    "systemSeconds": 2.652868,
+    "maxRssBytesMacOS": 1894498304,
+    "sha256": "c4ab04ac3499ac69b7374ed81139356e6259d9bc477321cd9d6de6e76cb6d0f7"
+  },
+  {
+    "arm": "rls_head_resid_l1_preset005",
+    "seed": 91012,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_l1_preset005",
+      "--seed",
+      "91012",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_l1_preset005_seed91012.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.178901583887637,
+    "userSeconds": 12.753813,
+    "systemSeconds": 2.737423,
+    "maxRssBytesMacOS": 1918648320,
+    "sha256": "34baa881ae94910bf7efc0ecfcffb15158610584cad9bd3402739ac73fda9760"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r",
+    "seed": 91012,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r",
+      "--seed",
+      "91012",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_seed91012.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.399964834097773,
+    "userSeconds": 13.290635,
+    "systemSeconds": 2.622456,
+    "maxRssBytesMacOS": 1924841472,
+    "sha256": "7c843a01aeb79ef62ec4605a5473f1d2469753ae26583058de468fc742010b75"
+  },
+  {
+    "arm": "rls_head_resid_identmap50_r_idet003_s005625",
+    "seed": 91012,
+    "command": [
+      ".venv/bin/python",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/run_shard.py",
+      "--arm",
+      "rls_head_resid_identmap50_r_idet003_s005625",
+      "--seed",
+      "91012",
+      "--expected-commit",
+      "0d7f8810199aa191edc7170bbf761518eb653d53",
+      "--out",
+      "outputs/ipmnist_screening/identmap_retention_dev_20261031/shards/rls_head_resid_identmap50_r_idet003_s005625_seed91012.json"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 9.786730000050738,
+    "userSeconds": 13.405203,
+    "systemSeconds": 2.838582,
+    "maxRssBytesMacOS": 1937211392,
+    "sha256": "770050c11e281b92204b11af587cc2df9c81f859452c02b1ab2275bbf088f8b5"
+  }
+]

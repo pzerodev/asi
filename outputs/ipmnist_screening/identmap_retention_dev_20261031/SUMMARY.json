@@ -1,0 +1,286 @@
+{
+  "arms": {
+    "rls_head_resid_identmap50_r": {
+      "acquisition_end_sentinel_accuracy": {
+        "mean": 0.8619791666666666,
+        "per_seed": [
+          0.8671875,
+          0.86328125,
+          0.85546875
+        ],
+        "sample_sd": 0.005966895436140417,
+        "standard_error": 0.0034449886862820195
+      },
+      "first_exposure_leading_pre_update_accuracy": {
+        "mean": 0.228,
+        "per_seed": [
+          0.224,
+          0.208,
+          0.252
+        ],
+        "sample_sd": 0.022271057451320093,
+        "standard_error": 0.012858201014657277
+      },
+      "pre_revisit_sentinel_accuracy": {
+        "mean": 0.11002604166666667,
+        "per_seed": [
+          0.150390625,
+          0.1015625,
+          0.078125
+        ],
+        "sample_sd": 0.0368687373301244,
+        "standard_error": 0.021286175422228926
+      },
+      "relearning_savings_accuracy": {
+        "mean": 0.6426666666666667,
+        "per_seed": [
+          0.668,
+          0.64,
+          0.62
+        ],
+        "sample_sd": 0.024110855093366853,
+        "standard_error": 0.013920408678547413
+      },
+      "retention_change_from_acquisition": {
+        "mean": -0.751953125,
+        "per_seed": [
+          -0.716796875,
+          -0.76171875,
+          -0.77734375
+        ],
+        "sample_sd": 0.03143257214732633,
+        "standard_error": 0.01814760399058119
+      },
+      "revisit_end_sentinel_accuracy": {
+        "mean": 0.8951822916666666,
+        "per_seed": [
+          0.89453125,
+          0.904296875,
+          0.88671875
+        ],
+        "sample_sd": 0.008807128423482215,
+        "standard_error": 0.005084797966085062
+      },
+      "revisit_leading_pre_update_accuracy": {
+        "mean": 0.8706666666666667,
+        "per_seed": [
+          0.892,
+          0.848,
+          0.872
+        ],
+        "sample_sd": 0.022030282189144428,
+        "standard_error": 0.012719189352225954
+      }
+    },
+    "rls_head_resid_identmap50_r_idet003_s005625": {
+      "acquisition_end_sentinel_accuracy": {
+        "mean": 0.8541666666666666,
+        "per_seed": [
+          0.865234375,
+          0.84375,
+          0.853515625
+        ],
+        "sample_sd": 0.010756973725168168,
+        "standard_error": 0.006210541675891574
+      },
+      "first_exposure_leading_pre_update_accuracy": {
+        "mean": 0.22533333333333333,
+        "per_seed": [
+          0.224,
+          0.2,
+          0.252
+        ],
+        "sample_sd": 0.02602562839459084,
+        "standard_error": 0.015025903559446191
+      },
+      "pre_revisit_sentinel_accuracy": {
+        "mean": 0.11783854166666667,
+        "per_seed": [
+          0.146484375,
+          0.078125,
+          0.12890625
+        ],
+        "sample_sd": 0.035498192396394755,
+        "standard_error": 0.02049489093580364
+      },
+      "relearning_savings_accuracy": {
+        "mean": 0.636,
+        "per_seed": [
+          0.644,
+          0.6559999999999999,
+          0.608
+        ],
+        "sample_sd": 0.024979991993593572,
+        "standard_error": 0.014422205101855946
+      },
+      "retention_change_from_acquisition": {
+        "mean": -0.736328125,
+        "per_seed": [
+          -0.71875,
+          -0.765625,
+          -0.724609375
+        ],
+        "sample_sd": 0.025540423497308635,
+        "standard_error": 0.014745770381388185
+      },
+      "revisit_end_sentinel_accuracy": {
+        "mean": 0.890625,
+        "per_seed": [
+          0.892578125,
+          0.89453125,
+          0.884765625
+        ],
+        "sample_sd": 0.005167483029423029,
+        "standard_error": 0.0029834477180702085
+      },
+      "revisit_leading_pre_update_accuracy": {
+        "mean": 0.8613333333333333,
+        "per_seed": [
+          0.868,
+          0.856,
+          0.86
+        ],
+        "sample_sd": 0.0061101009266077925,
+        "standard_error": 0.003527668414752791
+      }
+    },
+    "rls_head_resid_l1_preset005": {
+      "acquisition_end_sentinel_accuracy": {
+        "mean": 0.8619791666666666,
+        "per_seed": [
+          0.8671875,
+          0.86328125,
+          0.85546875
+        ],
+        "sample_sd": 0.005966895436140417,
+        "standard_error": 0.0034449886862820195
+      },
+      "first_exposure_leading_pre_update_accuracy": {
+        "mean": 0.228,
+        "per_seed": [
+          0.224,
+          0.208,
+          0.252
+        ],
+        "sample_sd": 0.022271057451320093,
+        "standard_error": 0.012858201014657277
+      },
+      "pre_revisit_sentinel_accuracy": {
+        "mean": 0.5989583333333334,
+        "per_seed": [
+          0.513671875,
+          0.615234375,
+          0.66796875
+        ],
+        "sample_sd": 0.07842552873868756,
+        "standard_error": 0.045279000128619996
+      },
+      "relearning_savings_accuracy": {
+        "mean": 0.6053333333333333,
+        "per_seed": [
+          0.616,
+          0.624,
+          0.576
+        ],
+        "sample_sd": 0.02571640202931457,
+        "standard_error": 0.014847371634213407
+      },
+      "retention_change_from_acquisition": {
+        "mean": -0.2630208333333333,
+        "per_seed": [
+          -0.353515625,
+          -0.248046875,
+          -0.1875
+        ],
+        "sample_sd": 0.08401465055073108,
+        "standard_error": 0.04850588111133693
+      },
+      "revisit_end_sentinel_accuracy": {
+        "mean": 0.8854166666666666,
+        "per_seed": [
+          0.888671875,
+          0.8984375,
+          0.869140625
+        ],
+        "sample_sd": 0.014917238590351042,
+        "standard_error": 0.008612471715705047
+      },
+      "revisit_leading_pre_update_accuracy": {
+        "mean": 0.8333333333333333,
+        "per_seed": [
+          0.84,
+          0.832,
+          0.828
+        ],
+        "sample_sd": 0.0061101009266077925,
+        "standard_error": 0.003527668414752791
+      }
+    }
+  },
+  "declared_absolute_difference_bar": 0.02,
+  "development_only": true,
+  "execution_commit": "0d7f8810199aa191edc7170bbf761518eb653d53",
+  "inputs": [
+    {
+      "path": "shards/rls_head_resid_l1_preset005_seed91010.json",
+      "sha256": "34f826e89e27f1e5d305798c19f09ce4b2963ebde292d7718b10cfa218df4816"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_seed91010.json",
+      "sha256": "1040b52eff22d667bdfef4329923f188191f8656c174121a811e0da9379a969b"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_idet003_s005625_seed91010.json",
+      "sha256": "ee1a3c407b4f83018c70ea2b73984728d92b85a31b799d360eddfb157826a7d7"
+    },
+    {
+      "path": "shards/rls_head_resid_l1_preset005_seed91011.json",
+      "sha256": "de2f1ccb4c55a46a8dec1cf233dd03b089b8d51d91aedd9a0567338568183ddb"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_seed91011.json",
+      "sha256": "a10bf555419d8e5abd5fa74e935844d541ae618ff40c28ad32a27cabb3a0cf42"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_idet003_s005625_seed91011.json",
+      "sha256": "c4ab04ac3499ac69b7374ed81139356e6259d9bc477321cd9d6de6e76cb6d0f7"
+    },
+    {
+      "path": "shards/rls_head_resid_l1_preset005_seed91012.json",
+      "sha256": "34baa881ae94910bf7efc0ecfcffb15158610584cad9bd3402739ac73fda9760"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_seed91012.json",
+      "sha256": "7c843a01aeb79ef62ec4605a5473f1d2469753ae26583058de468fc742010b75"
+    },
+    {
+      "path": "shards/rls_head_resid_identmap50_r_idet003_s005625_seed91012.json",
+      "sha256": "770050c11e281b92204b11af587cc2df9c81f859452c02b1ab2275bbf088f8b5"
+    }
+  ],
+  "limits": [
+    "n=3 development seeds, one A/B/A protocol",
+    "the checkpoint's current remap is frozen for every sentinel",
+    "this does not distinguish erased weights from inaccessible mappings",
+    "trace hashes bind the producer output but do not attest execution",
+    "no retained-knowledge, anti-forgetting, promotion or SOTA claim"
+  ],
+  "n": 3,
+  "paired_primary": {
+    "mean": -0.4889322916666667,
+    "per_seed": [
+      -0.36328125,
+      -0.513671875,
+      -0.58984375
+    ],
+    "sample_sd": 0.11528953482078375,
+    "standard_error": 0.06656244396352623
+  },
+  "scientific_promotion_allowed": false,
+  "seeds": [
+    91010,
+    91011,
+    91012
+  ],
+  "study_decision": "lower_direct_frozen_retention"
+}

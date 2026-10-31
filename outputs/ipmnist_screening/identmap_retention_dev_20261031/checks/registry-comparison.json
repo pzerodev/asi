@@ -1,0 +1,73 @@
+{
+  "before_exit": 2,
+  "after_exit": 2,
+  "all_five_claims_preexisting_invalid": true,
+  "claims": [
+    {
+      "claim_id": "recurring_pair_features",
+      "before_status": "invalid",
+      "after_status": "invalid",
+      "errors_unchanged": true,
+      "artifacts_unchanged": true,
+      "protocol_unchanged": true,
+      "seeds_unchanged": true,
+      "thresholds_unchanged": true,
+      "source_bindings_unchanged_except_validation_head": true,
+      "before_validation_head": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+      "after_validation_head": "0d7f8810199aa191edc7170bbf761518eb653d53"
+    },
+    {
+      "claim_id": "scale_robust_pair_features",
+      "before_status": "invalid",
+      "after_status": "invalid",
+      "errors_unchanged": true,
+      "artifacts_unchanged": true,
+      "protocol_unchanged": true,
+      "seeds_unchanged": true,
+      "thresholds_unchanged": true,
+      "source_bindings_unchanged_except_validation_head": true,
+      "before_validation_head": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+      "after_validation_head": "0d7f8810199aa191edc7170bbf761518eb653d53"
+    },
+    {
+      "claim_id": "ftl_world_model_decision_fidelity",
+      "before_status": "invalid",
+      "after_status": "invalid",
+      "errors_unchanged": true,
+      "artifacts_unchanged": true,
+      "protocol_unchanged": true,
+      "seeds_unchanged": true,
+      "thresholds_unchanged": true,
+      "source_bindings_unchanged_except_validation_head": true,
+      "before_validation_head": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+      "after_validation_head": "0d7f8810199aa191edc7170bbf761518eb653d53"
+    },
+    {
+      "claim_id": "recurring_multiagent_coadaptation",
+      "before_status": "invalid",
+      "after_status": "invalid",
+      "errors_unchanged": true,
+      "artifacts_unchanged": true,
+      "protocol_unchanged": true,
+      "seeds_unchanged": true,
+      "thresholds_unchanged": true,
+      "source_bindings_unchanged_except_validation_head": true,
+      "before_validation_head": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+      "after_validation_head": "0d7f8810199aa191edc7170bbf761518eb653d53"
+    },
+    {
+      "claim_id": "continual_intelligence_amplification",
+      "before_status": "invalid",
+      "after_status": "invalid",
+      "errors_unchanged": true,
+      "artifacts_unchanged": true,
+      "protocol_unchanged": true,
+      "seeds_unchanged": true,
+      "thresholds_unchanged": true,
+      "source_bindings_unchanged_except_validation_head": true,
+      "before_validation_head": "ea6eee9d0da3fce024028810b60edfb7fa4389b4",
+      "after_validation_head": "0d7f8810199aa191edc7170bbf761518eb653d53"
+    }
+  ],
+  "all_check_fields_unchanged": true
+}

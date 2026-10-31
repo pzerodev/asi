@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Users/ferb/Documents/ChatGPT/sloptest/projects/asi/../../campaign/asi-identmap-retention-run.py", line 132, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/Users/ferb/Documents/ChatGPT/sloptest/projects/asi/../../campaign/asi-identmap-retention-run.py", line 109, in main
+    report = screening.run_recurring_ipmnist_retention_development(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ferb/Documents/ChatGPT/sloptest/projects/asi/alberta_framework/benchmarks/ipmnist_screening.py", line 10232, in run_recurring_ipmnist_retention_development
+    model_inputs = spec.frozen_probe_input(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/ferb/Documents/ChatGPT/sloptest/projects/asi/alberta_framework/benchmarks/ipmnist_screening.py", line 5567, in _rls_head_frozen_probe_input
+    raise NotImplementedError(
+NotImplementedError: sentinel probes are unsupported for the rls_head arms: the deployed model is the champion body + RLS readout, not the protocol MLP head that the probe harness would score

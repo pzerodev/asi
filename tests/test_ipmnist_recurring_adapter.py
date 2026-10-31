@@ -53,6 +53,12 @@ DATA_Y = np.asarray([0, 1, 1, 0, 1, 0, 1, 0, 1], dtype=np.int32)
 PERMUTATION_A = np.asarray([0, 1, 2, 3], dtype=np.int32)
 PERMUTATION_B = np.asarray([3, 1, 0, 2], dtype=np.int32)
 SENTINELS = (7, 8)
+IDENTIFIER_ARMS = (
+    "rls_head_resid_identmap50_r",
+    "rls_head_resid_identmap200_r",
+    "rls_head_resid_identmap50_r_idet003",
+    "rls_head_resid_identmap50_r_idet003_s005625",
+)
 
 
 def test_confirmed_rls_winner_runs_recurring_retention_with_frozen_probes() -> None:
@@ -72,6 +78,18 @@ def test_confirmed_rls_winner_runs_recurring_retention_with_frozen_probes() -> N
     checkpoint_hashes = tuple(score.learner_state_sha256 for score in report.sentinel_scores)
     assert checkpoint_hashes[1] == checkpoint_hashes[2]
     assert checkpoint_hashes[3] == checkpoint_hashes[4]
+    assert report.to_config()["scientific_promotion_allowed"] is False
+
+
+@pytest.mark.parametrize("name", IDENTIFIER_ARMS)
+def test_identifier_rls_arms_run_recurring_retention_with_frozen_probes(name: str) -> None:
+    report = run_recurring_ipmnist_retention_development(
+        DATA_X, DATA_Y, screening_spec(name), seed=19, config=CONFIG,
+        phase_lengths=(2, 3, 2),
+        permutations=(PERMUTATION_A, PERMUTATION_B, PERMUTATION_A.copy()),
+        sentinel_indices=SENTINELS, relearning_window=1,
+    )
+    assert len(report.sentinel_scores) == 5
     assert report.to_config()["scientific_promotion_allowed"] is False
 
 
@@ -192,7 +210,79 @@ def test_rls_probe_matches_actual_learner_loss_readout(
     assert screening._declared_learner_state_sha256(params, state, key) == before
 
 
-@pytest.mark.parametrize("name", ["rls_head_resid_l1_preset005", "sigma0_shiftnorm_d099"])
+@pytest.mark.parametrize("name", IDENTIFIER_ARMS)
+@pytest.mark.parametrize("checkpoint", ["hand", "initialized", "trained"])
+@pytest.mark.parametrize("compiled", [False, True])
+def test_identifier_probe_matches_deployed_loss_readout_without_state_updates(
+    name: str, checkpoint: str, compiled: bool,
+) -> None:
+    spec = screening_spec(name)
+    init_fn, step_fn = spec.factory(spec.hyperparameters)
+    key = jr.key(31, impl="threefry2x32")
+    if checkpoint == "hand":
+        params, inner = _hand_rls_checkpoint()
+        state = init_fn(params).replace(inner=inner)
+        observations = jnp.asarray([[3, 1, 2, 0], [-1, -1, 4, 0]], jnp.float32)
+    else:
+        params = init_mlp_params(jr.key(17, impl="threefry2x32"), CONFIG)
+        state = init_fn(params)
+        if checkpoint == "trained":
+            for index in range(4):
+                params, state, _ = step_fn(
+                    params, state, jnp.asarray(DATA_X[index]),
+                    jnp.asarray(DATA_Y[index]), jr.fold_in(key, index),
+                )
+            assert bool(jnp.any(state.inner.wout != 0))
+        observations = jnp.asarray(DATA_X[-2:])
+    # A valid checkpoint can contain any learned bijection. Its current mapping,
+    # rather than the evaluator's A identity, must govern every frozen probe.
+    state = state.replace(remap=jnp.asarray([2, 0, 3, 1], jnp.int32))
+
+    def learner_logits(
+        params: dict[str, Array], state: Any, x: Array, y: Array, key: Array,
+    ) -> Array:
+        def loss(wout: Array) -> Array:
+            replacement = state.replace(inner=state.inner.replace(wout=wout))
+            _, _, metrics = step_fn(params, replacement, x, y, key)
+            return metrics[1]
+
+        gradient: Array = jax.grad(loss)(state.inner.wout)
+        return gradient[-1] + jax.nn.one_hot(y, CONFIG.n_classes)
+
+    probe = spec.frozen_probe_logits
+    assert probe is not None
+
+    def frozen_logits(params: dict[str, Array], state: Any, x: Array) -> Array:
+        return probe(params, state, x, spec.hyperparameters)
+
+    actual_forward = jax.jit(learner_logits) if compiled else learner_logits
+    frozen_forward = jax.jit(frozen_logits) if compiled else frozen_logits
+    learner_step = jax.jit(step_fn) if compiled else step_fn
+    before = screening._declared_learner_state_sha256(params, state, key)
+    for index, observation in enumerate(observations):
+        label = jnp.asarray(index, jnp.int32)
+        _, next_state, _ = learner_step(params, state, observation, label, key)
+        # The actual step advances the inner EMA before its prediction. Freeze
+        # precisely those resulting statistics while retaining the old body,
+        # readout and remap; the sentinel path itself must advance nothing.
+        aligned = state.replace(inner=state.inner.replace(norm=next_state.inner.norm))
+        aligned_before = screening._declared_learner_state_sha256(params, aligned, key)
+        expected = actual_forward(params, state, observation, label, key)
+        logits = frozen_forward(params, aligned, observation[None, :])
+        np.testing.assert_allclose(np.asarray(logits[0]), np.asarray(expected),
+                                   atol=1e-6, rtol=1e-6)
+        assert screening._declared_learner_state_sha256(params, aligned, key) == aligned_before
+        if checkpoint == "hand":
+            wrong_mapping = screening._rls_head_frozen_probe_logits(
+                params, aligned.inner, observation[None, :], spec.hyperparameters,
+            )
+            assert not np.allclose(np.asarray(logits), np.asarray(wrong_mapping))
+    assert screening._declared_learner_state_sha256(params, state, key) == before
+
+
+@pytest.mark.parametrize(
+    "name", ["rls_head_resid_l1_preset005", "sigma0_shiftnorm_d099", *IDENTIFIER_ARMS]
+)
 def test_sentinel_probes_preserve_unprobed_training_continuation(name: str) -> None:
     """Compare the public runner with the same seven updates and no probes."""
     spec = screening_spec(name)

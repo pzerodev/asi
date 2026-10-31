@@ -5588,6 +5588,25 @@ def _rls_head_frozen_probe_logits(
     return jax.vmap(lambda x: _rls_head_forward(params, state.wout, x)[0])(normalized)
 
 
+def _rls_head_ident_frozen_probe_logits(
+    params: dict[str, Array],
+    state: Any,
+    observation: Array,
+    hyperparameters: Mapping[str, float],
+) -> Array:
+    """Probe the identifier's current deployed mapping and inner RLS readout.
+
+    The evaluator must not substitute its known permutation or run the online
+    identifier. A frozen A probe after B uses the checkpoint's B-era remap,
+    so reacquiring a mapping cannot conceal a loss of direct retention.
+    """
+    if not isinstance(state, RLSHeadIdentState):
+        raise TypeError("an identifier frozen probe requires RLSHeadIdentState")
+    return _rls_head_frozen_probe_logits(
+        params, state.inner, observation[:, state.remap], hyperparameters
+    )
+
+
 # =============================================================================
 # (v2) Transient attack: champion/NB ensemble with online learned vote weights
 # =============================================================================
@@ -8585,6 +8604,7 @@ def _build_registry() -> dict[str, ScreeningSpec]:
                 hyperparameters=_rls_head_hp(**ident_overrides),
                 factory=_make_rls_head_identmap_learner,
                 frozen_probe_input=_rls_head_frozen_probe_input,
+                frozen_probe_logits=_rls_head_ident_frozen_probe_logits,
                 description=(
                     "Residual RLS-head incumbent behind an online "
                     "permutation identifier: " + ident_extra + ". Labels "

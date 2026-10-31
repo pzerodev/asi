@@ -1,0 +1,159 @@
+"""One fixed, nonpromoting recurrence shard; use the existing public-data cache only."""
+# ruff: noqa: E402
+# Bind the checkout import path and deny network access before importing the runner.
+
+import argparse
+import hashlib
+import json
+import sys
+import time
+from pathlib import Path
+
+ROOT = Path.cwd().resolve()
+sys.path.insert(0, str(ROOT))
+
+
+def no_network(event, args):
+    if event == "socket.connect":
+        raise RuntimeError("this study forbids network access and dataset downloads")
+
+
+sys.addaudithook(no_network)
+
+import jax
+import numpy as np
+
+from alberta_framework.benchmarks import ipmnist_screening as screening
+from alberta_framework.benchmarks.upgd_ipmnist import IPMNISTConfig, load_mnist_train
+
+ARMS = (
+    "rls_head_resid_l1_preset005",
+    "rls_head_resid_identmap50_r",
+    "rls_head_resid_identmap50_r_idet003_s005625",
+)
+SEEDS = (91010, 91011, 91012)
+CACHE = ROOT / "outputs/upgd_ipmnist/reconstructed_openml_cache"
+
+
+def digest(array):
+    raw = np.ascontiguousarray(array)
+    h = hashlib.sha256()
+    h.update(str(raw.dtype).encode())
+    h.update(str(raw.shape).encode())
+    h.update(raw.tobytes())
+    return h.hexdigest()
+
+
+def load_data():
+    for relative in (
+        "data/v1/download/52667/mnist_784.arff.gz",
+        "api/v1/json/data/554.gz",
+        "api/v1/json/data/qualities/554.gz",
+        "api/v1/json/data/features/554.gz",
+        "api/v1/json/data/list/data_name/mnist_784/limit/2/data_version/1.gz",
+    ):
+        if not (CACHE / "openml/openml.org" / relative).is_file():
+            raise RuntimeError("required public MNIST cache member is absent")
+    return load_mnist_train(data_home=CACHE)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--arm", choices=ARMS, required=True)
+    parser.add_argument("--seed", type=int, choices=SEEDS, required=True)
+    parser.add_argument("--expected-commit", required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--qualify-data-only", action="store_true")
+    args = parser.parse_args()
+    if args.out.exists():
+        raise FileExistsError("refusing to replace an existing study artifact")
+    source = screening._screening_source_provenance(ROOT)
+    if source["git_commit"] != args.expected_commit:
+        raise RuntimeError("source commit does not match the declared execution")
+    environment = screening._screening_runtime_environment()
+    if jax.default_backend() != "cpu" or jax.config.jax_default_prng_impl != "threefry2x32":
+        raise RuntimeError("study requires CPU and explicit Threefry environment")
+    if jax.config.jax_random_seed_offset != 0:
+        raise RuntimeError("study requires zero seed offset")
+    x, y = load_data()
+    data = screening._screening_dataset_provenance(x, y)
+    rng = np.random.default_rng(91000)
+    a = rng.permutation(784).astype(np.int32)
+    b = rng.permutation(784).astype(np.int32)
+    indices = np.random.default_rng(91001).choice(len(x), size=512, replace=False)
+    bindings = {
+        "dataset_provenance": data,
+        "permutations_sha256": [screening.ipmnist_permutation_sha256(v) for v in (a, b)],
+        "sentinel_indices_sha256": digest(indices),
+        "sentinel_sets_sha256": [
+            screening.ipmnist_sentinel_set_sha256(x, y, v, indices) for v in (a, b)
+        ],
+    }
+    metadata = {
+        "source_provenance": source,
+        "environment": environment,
+        "driver_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "arm": args.arm,
+        "seed": args.seed,
+        **bindings,
+    }
+    if args.qualify_data_only:
+        # Compare to the independently retained grid1 sentinel commitments.
+        old_indices = (
+            np.random.default_rng(20261004).choice(len(x), size=256, replace=False).astype(np.int64)
+        )
+        old_perms = [
+            np.random.default_rng(seed).permutation(784).astype(np.int32) for seed in (910, 911)
+        ]
+        expected = [
+            "4d2f874d52a0f6226798e6520d04e581f8ea387c1e8724c11dfd8df2ad175706",
+            "978d31e575d899ad2a9f0ec872f05ad692470b57fdcda9f9392f50b44eebc65f",
+        ]
+        actual = [screening.ipmnist_sentinel_set_sha256(x, y, v, old_indices) for v in old_perms]
+        if actual != expected:
+            raise RuntimeError(
+                "cached materialization disagrees with the published grid1 sentinel data"
+            )
+        metadata["published_grid1_sentinel_sets_match"] = True
+        metadata["array_identity_parts"] = [digest(x), digest(y)]
+        payload = metadata
+    else:
+        started = time.monotonic()
+        report = screening.run_recurring_ipmnist_retention_development(
+            x,
+            y,
+            screening.screening_spec(args.arm),
+            seed=args.seed,
+            config=IPMNISTConfig(n_tasks=3, task_length=5000),
+            phase_lengths=(5000, 5000, 5000),
+            permutations=(a, b, a.copy()),
+            sentinel_indices=indices,
+            relearning_window=250,
+        ).to_config()
+        elapsed = time.monotonic() - started
+        for flag in (
+            "scientific_promotion_allowed",
+            "performance_thresholds_applied",
+            "retention_claimed",
+        ):
+            if report[flag] is not False:
+                raise RuntimeError("adapter policy changed: " + flag)
+        if screening._screening_source_provenance(ROOT) != source:
+            raise RuntimeError("source changed during execution")
+        if screening._screening_dataset_provenance(x, y) != data:
+            raise RuntimeError("dataset changed during execution")
+        payload = {**metadata, "wall_clock_seconds": elapsed, "report": report}
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    with args.out.open("x", encoding="utf-8") as stream:
+        stream.write(json.dumps(payload, sort_keys=True, indent=2, allow_nan=False) + "\n")
+    print(
+        json.dumps(
+            {"arm": args.arm, "seed": args.seed, "out": str(args.out), "status": "completed"}
+        ),
+        flush=True,
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
